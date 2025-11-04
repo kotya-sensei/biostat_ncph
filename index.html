@@ -7,178 +7,137 @@
   <meta name="description" content="Онлайн-курс повышения квалификации по биостатистике. 120 ак.ч.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>">
   <script async src="https://tally.so/widgets/embed.js"></script>
-
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     :root{
       --accent:#0b5aa0;
-      --accent-light:#4a8cd1;
-      --bg:#f8fafc;
-      --card:#ffffff;
-      --text:#1e293b;
-      --border:#e2e8f0;
+      --accent-light:#3b82f6;
+      --bg:#0f172a;
+      --card:#ffffff0d;
+      --text:#e2e8f0;
+      --border:#ffffff1a;
+      --radius:14px;
+      --section-gap:5rem; /* ← интервал между секциями */
     }
 
     *{box-sizing:border-box;margin:0;padding:0}
     body{
       font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
       color:var(--text);
+      background:var(--bg);
       line-height:1.6;
       min-height:100vh;
-      background:var(--bg);
-      position:relative;
       overflow-x:hidden;
     }
 
-    /* Геометрический узор из слов */
-    .pattern{
-      position:absolute;
-      inset:0;
-      z-index:0;
-      opacity:.06;
-      font-weight:600;
-      font-size:clamp(1.2rem,2.5vw,2rem);
-      color:var(--accent);
-      user-select:none;
-      overflow:hidden;
-      display:grid;
-      grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-      gap:2rem 3rem;
-      padding:4rem;
-      align-content:center;
-      text-transform:uppercase;
-      letter-spacing:.1em;
+    /* Видео-фон + оверлей */
+    .video-bg{
+      position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;
+      filter:brightness(.35) contrast(1.1);
     }
-    .pattern span:nth-child(odd){color:var(--accent-light)}
-
-    /* Контент поверх узора */
-    .wrapper{
-      position:relative;
-      z-index:1;
-      max-width:900px;
-      margin:0 auto;
-      padding:3rem 2rem;
+    .overlay{
+      position:fixed;inset:0;background:linear-gradient(135deg,rgba(15,23,42,.85) 0%, rgba(15,23,42,.65) 100%);z-index:-1;
     }
 
-    h1,h2{color:var(--accent);margin-bottom:.75em}
-    h1{font-size:clamp(1.8rem,4vw,2.5rem)}
-    h2{font-size:clamp(1.3rem,3vw,1.8rem)}
+    /* Счётчик дней до старта */
+    .countdown{
+      display:flex;gap:1rem;justify-content:center;margin:1.5rem 0 2.5rem;
+    }
+    .countdown div{
+      background:var(--card);backdrop-filter:blur(10px);border:1px solid var(--border);
+      border-radius:var(--radius);padding:.75rem 1.25rem;text-align:center;min-width:70px;
+    }
+    .countdown span:first-child{font-size:1.8rem;font-weight:700;color:var(--accent-light)}
+    .countdown span:last-child{font-size:.75rem;text-transform:uppercase;opacity:.8}
 
-    p{margin-bottom:1em}
-    a{color:var(--accent);text-decoration:none}
-    a:hover{text-decoration:underline}
+    /* Живые цифры */
+    .stats{
+      display:flex;gap:2rem;justify-content:center;margin-bottom:3rem;flex-wrap:wrap;
+    }
+    .stats div{
+      background:var(--card);backdrop-filter:blur(10px);border:1px solid var(--border);
+      border-radius:var(--radius);padding:1.25rem 2rem;text-align:center;transition:transform .25s;
+    }
+    .stats div:hover{transform:translateY(-4px)}
+    .stats .num{font-size:2.2rem;font-weight:700;color:var(--accent-light)}
+    .stats .txt{font-size:.9rem;opacity:.85}
 
+    h1,h2{color:var(--accent-light);margin-bottom:.5em}
+    h1{font-size:clamp(2rem,5vw,3rem);letter-spacing:-.02em}
+    h2{font-size:clamp(1.4rem,3vw,2rem)}
+
+    p{margin-bottom:1em;max-width:65ch}
+
+    /* Аккордеон */
     details{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:12px;
-      padding:1rem 1.5rem;
-      margin-bottom:1rem;
-      cursor:pointer;
-      transition:box-shadow .2s;
+      background:var(--card);backdrop-filter:blur(10px);border:1px solid var(--border);
+      border-radius:var(--radius);padding:1.25rem 1.75rem;margin-bottom:1rem;cursor:pointer;
+      transition:box-shadow .25s;
     }
-    details:hover{box-shadow:0 8px 20px -10px rgba(11,90,160,.15)}
-    summary{font-weight:600;list-style:none;display:flex;align-items:center;justify-content:space-between}
-    summary::after{content:'▸';font-size:1.2rem;transition:transform .2s}
-    details[open] summary::after{transform:rotate(90deg)}
+    details:hover{box-shadow:0 12px 30px -15px rgba(59,130,246,.25)}
+    summary{
+      display:flex;align-items:center;justify-content:space-between;font-weight:600;list-style:none;
+    }
+    summary::after{content:'\f078';font-family:'Font Awesome 6 Free';font-weight:900;font-size:.9rem;transition:transform .25s}
+    details[open] summary::after{transform:rotate(180deg)}
     ul{margin-left:1.25em}
 
+    /* ЯРКАЯ кнопка: градиент + свечение + пульс */
     .btn{
-      display:inline-flex;
-      align-items:center;
-      gap:.5em;
-      background:var(--accent);
-      color:#fff;
-      border:none;
-      padding:14px 28px;
-      border-radius:8px;
-      font-size:1.1rem;
-      font-weight:600;
-      cursor:pointer;
-      transition:background .25s,transform .15s;
+      display:inline-flex;align-items:center;gap:.6em;
+      background:linear-gradient(135deg,#f59e0b 0%,#ef4444 100%);
+      color:#fff;border:none;padding:18px 36px;border-radius:var(--radius);
+      font-size:1.25rem;font-weight:700;cursor:pointer;
+      box-shadow:0 0 20px #f59e0b80, 0 6px 20px -8px rgba(239,68,68,.5);
+      transition:transform .2s,box-shadow .2s;
+      animation:pulse 2s infinite;
     }
-    .btn:hover{background:var(--accent-light);transform:translateY(-2px)}
-    .footer{margin-top:4rem;font-size:.8rem;color:#64748b;text-align:center}
+    .btn:hover{transform:translateY(-3px);box-shadow:0 0 30px #f59e0b, 0 10px 25px -8px rgba(239,68,68,.7)}
+    .btn i{font-size:1.4rem}
+    @keyframes pulse{
+      0%{box-shadow:0 0 0 0 #f59e0b80}
+      70%{box-shadow:0 0 0 12px #f59e0b00}
+      100%{box-shadow:0 0 0 0 #f59e0b00}
+    }
+
+    /* Секции с большим интервалом */
+    .section{margin:var(--section-gap) 0}
+
+    .contacts{margin-top:3rem;font-size:.95rem}
+    .footer{margin-top:4rem;font-size:.8rem;text-align:center;opacity:.6}
+
+    @media(max-width:600px){
+      .countdown,.stats{gap:.75rem 1.5rem}
+      .stats div{padding:1rem}
+    }
   </style>
 </head>
 
 <body>
-  <!-- Геометрический узор из слов -->
-  <div class="pattern" aria-hidden="true">
-    <span>Data</span><span>Biostat</span><span>RCT</span><span>p-value</span>
-    <span>OR</span><span>HR</span><span>CI 95%</span><span>ANOVA</span>
-    <span>Survival</span><span>Kaplan-Meier</span><span>Cox</span><span>Meta</span>
-    <span>Regression</span><span>Logistic</span><span>Normal</span><span>Chi²</span>
-    <span>Sample Size</span><span>Evidence</span><span>RMST</span><span>Forest</span>
-  </div>
+  <video class="video-bg" autoplay muted loop playsinline>
+    <source src="https://cdn.pixabay.com/vimeo/769374373/abstract-12285.mp4?width=1280&hash=8e6e3e5b5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e" type="video/mp4">
+  </video>
+  <div class="overlay"></div>
 
-  <!-- Контент -->
   <div class="wrapper">
-    <h1>Курс «Искусство биостатистики: анализ, интерпретация, публикация»</h1>
-    <p><strong>17 – 29 ноября 2025 г.</strong> · 120 ак. ч. · онлайн (Zoom)</p>
+    <h1>Искусство биостатистики: анализ, интерпретация, публикация</h1>
+    <p><strong>17 – 29 ноября 2025</strong> · 120 ак.ч. · онлайн (Zoom)</p>
 
-    <h2>Программа</h2>
-    <details>
-      <summary>Модуль 1. Основы биостатистики и дизайн исследований (26 ч)</summary>
-      <ul>
-        <li>1.1. Введение в доказательную медицину. Типы данных</li>
-        <li>1.2. Описательная статистика и визуализация</li>
-        <li>1.3. Дизайн эпидемиологических исследований</li>
-        <li>1.4. Введение в R / RStudio</li>
-      </ul>
-    </details>
+    <!-- Счётчик дней до старта -->
+    <div class="countdown" id="countdown"></div>
 
-    <details>
-      <summary>Модуль 2. Основы статистического вывода (30 ч)</summary>
-      <ul>
-        <li>2.1. Вероятность и статистические распределения</li>
-        <li>2.2. Проверка гипотез (p-value, ДИ)</li>
-        <li>2.3. Методы сравнения групп</li>
-        <li>2.4. Расчёт размера выборки</li>
-      </ul>
-    </details>
-
-    <details>
-      <summary>Модуль 3. Анализ взаимосвязей (32 ч)</summary>
-      <ul>
-        <li>3.1. Корреляционный анализ</li>
-        <li>3.2. Линейная регрессия</li>
-        <li>3.3. Логистическая регрессия</li>
-        <li>3.4. OR vs RR</li>
-      </ul>
-    </details>
-
-    <details>
-      <summary>Модуль 4. Продвинутые методы (28 ч)</summary>
-      <ul>
-        <li>4.1. Кривые Каплана-Майера</li>
-        <li>4.2. Модель Кокса</li>
-        <li>4.3. Основы мета-анализа</li>
-      </ul>
-    </details>
-
-    <h2>Регистрация слушателей</h2>
-    <p>Заполните форму и загрузите 4 документа (PDF/JPG, до 5 МБ каждый):</p>
-
-    <button data-tally-open="Np5rLj"
-            data-tally-width="600"
-            data-tally-emoji-text="📄"
-            data-tally-emoji-animation="bounce"
-            class="btn">
-      Подать заявку
-    </button>
-
-    <h2>Контакты</h2>
-    <p>
-      E-mail: <a href="mailto:ncph_science@mail.ru">ncph_science@mail.ru</a><br>
-      Телефон: <a >+7 (707) 123 1523</a>
-    </p>
-
-    <div class="footer">
-      © 2025 РГП на ПХВ «Национальный центр общественного здравоохранения» МЗ РК
+    <!-- Живые цифры -->
+    <div class="stats">
+      <div><div class="num" data-target="420">0</div><div class="txt">часов видео</div></div>
+      <div><div class="num" data-target="15">0</div><div class="txt">практических заданий</div></div>
+      <div><div class="num" data-target="100">0</div><div class="txt">% онлайн</div></div>
     </div>
-  </div>
-</body>
-</html>
+
+    <!-- Секция 1: Программа -->
+    <section class="section">
+      <h2>Программа курса</h2>
+      <details>
+        <summary>Модуль 1. Основы биостатистики и дизайн исследований (26 ч)</summary>
+        <ul><li>1.1. Введение в доказательную медицину. Типы данных</li><li>1.2. Описательная статистика и визуализация</li><li>

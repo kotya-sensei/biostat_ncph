@@ -14,14 +14,13 @@
     :root{
       --accent:#0b5aa0;
       --accent-light:#3b82f6;
-      --bg:#f5f7fa;               /* ← светлый фон */
+      --bg:#f5f7fa;
       --card:#ffffff;
       --text:#1e293b;
       --border:#e2e8f0;
       --radius:14px;
       --gap:5rem;
 
-      /* ЯВНЫЕ, но сдержанные цвета секций */
       --c-hero:#e0f2fe;
       --c-short:#fef3c7;
       --c-audience:#dcfce7;
@@ -81,16 +80,38 @@
       0%{box-shadow:0 0 0 0 #f59e0b80}70%{box-shadow:0 0 0 12px #f59e0b00}100%{box-shadow:0 0 0 0 #f59e0b00}
     }
 
-    /* Цветные секции + центрирование текста в «Кратко» */
+    /* Секции */
     .section{margin:var(--gap) 0;padding:3rem 2rem;border-radius:var(--radius);background:var(--bg)}
     .section>*{max-width:900px;margin-left:auto;margin-right:auto}
-    .center{text-align:center}
-    .hero{background:var(--c-hero)}.short{background:var(--c-short)}.audience{background:var(--c-audience)}.program{background:var(--c-program)}.reg{background:var(--c-reg)}.contacts{background:var(--c-contacts)}
+
+    /* ✅ Центровка текста где нужно */
+    .hero, .short, .reg, .contacts { text-align:center; }
+
+    /* ✅ Герой: ещё и вертикальная центровка */
+    .hero{
+      background:var(--c-hero);
+      min-height:72vh;
+      display:grid;
+      place-items:center;
+      padding:6rem 2rem;         /* больше «воздуха» для крупного заголовка */
+    }
+
+    .short{background:var(--c-short)}
+    .audience{background:var(--c-audience)}
+    .program{background:var(--c-program)}
+    .reg{background:var(--c-reg)}
+    .contacts{background:var(--c-contacts)}
+
+    /* Небольшой отступ у центральной кнопки */
+    .reg .btn{ margin-top:.75rem; }
 
     /* Подвал */
     .footer{margin-top:4rem;font-size:.8rem;text-align:center;opacity:.6}
 
-    @media(max-width:600px){.stats{gap:.75rem 1.5rem}.stats div{padding:1rem}}
+    @media(max-width:600px){
+      .stats{gap:.75rem 1.5rem}
+      .stats div{padding:1rem}
+    }
   </style>
 </head>
 
@@ -112,7 +133,7 @@
       </div>
     </section>
 
-    <!-- Секция 1: Кратко о курсе (завлекающая) -->
+    <!-- Секция 1: Кратко о курсе -->
     <section class="section short">
       <h2>Кратко о курсе</h2>
       <p>
@@ -167,7 +188,7 @@
       <h2>Контакты</h2>
       <p>
         E-mail: <a href="mailto:ncph_science@mail.ru">ncph_science@mail.ru</a><br>
-        Куратор курса: Хожамқұл Фариза<a href=»tel:+77071231523″>+7 707 123 1523</a> 
+        Куратор курса: Хожамқұл Фариза — <a href="tel:+77071231523">+7&nbsp;707&nbsp;123&nbsp;1523</a>
       </p>
     </section>
 

@@ -193,7 +193,15 @@
       </details>
     </section>
 
-    <!-- 6 Подвал -->
+    <!-- 6 Вторая форма «Задать вопрос» -->
+<section class="section question-box">
+  <h2>Не нашли ответ? Задать вопрос</h2>
+ <button data-tally-open="D42KWq" data-tally-width="600" data-tally-emoji-text="❓" data-tally-emoji-animation="bounce" class="btn">
+        <i class="fa-solid fa-paper-plane"></i> Задать вопрос
+  </button>
+    </section>
+
+    <!-- 7 Подвал -->
     <div class="footer">
       © 2025 РГП на ПХВ «Национальный центр общественного здравоохранения» МЗ РК
     </div>
@@ -216,52 +224,5 @@
     },{threshold:.7});
     counters.forEach(c=>observer.observe(c));
   </script>
-<!-- ПЛАВАЮЩАЯ КНОПКА + МАЛЕНЬКОЕ ОКНО ДЛЯ ВТОРОЙ ФОРМЫ -->
-<style>
-/* Кнопка-иконка */
-.float-btn{
-  position:fixed;bottom:20px;right:20px;z-index:999;
-  width:56px;height:56px;border-radius:50%;
-  background:linear-gradient(135deg,#f59e0b 0%,#ef4444 100%);
-  color:#fff;border:none;cursor:pointer;
-  box-shadow:0 4px 20px rgba(239,68,68,.4);
-  display:flex;align-items:center;justify-content:center;
-  transition:transform .2s,box-shadow .2s;
-}
-.float-btn:hover{transform:scale(1.1);box-shadow:0 6px 25px rgba(239,68,68,.5)}
-
-/* Маленькое окно */
-.float-form{
-  position:fixed;bottom:90px;right:20px;z-index:998;
-  width:320px;height:400px;background:#fff;border-radius:14px;
-  box-shadow:0 10px 30px rgba(0,0,0,.2);
-  display:none;flex-direction:column;overflow:hidden;
-}
-.float-form-header{
-  padding:10px 14px;background:linear-gradient(135deg,#f59e0b 0%,#ef4444 100%);
-  color:#fff;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:space-between;
-}
-.float-form-close{cursor:pointer;font-size:18px;line-height:1}
-.float-form iframe{width:100%;height:calc(100% - 40px);border:0}
-</style>
-
-<!-- ИКОНКА-КНОПКА -->
-<button class="float-btn" onclick="openFloatForm()" aria-label="Задать вопрос">
-  <i class="fa-solid fa-question"></i>
-</button>
-
-<!-- ПЛАВАЮЩЕЕ ОКНО -->
-<div class="float-form" id="floatForm">
-  <div class="float-form-header">
-    <span>Задать вопрос</span>
-    <span class="float-form-close" onclick="closeFloatForm()">&times;</span>
-  </div>
-  <iframe src="https://tally.so/r/D42KWq?alignLeft=1&hideTitle=1" title="Question box"></iframe>
-</div>
-
-<script>
-function openFloatForm(){document.getElementById('floatForm').style.display='flex';}
-function closeFloatForm(){document.getElementById('floatForm').style.display='none';}
-</script>
 </body>
 </html>

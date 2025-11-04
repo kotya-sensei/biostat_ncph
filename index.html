@@ -15,11 +15,18 @@
       --accent:#0b5aa0;
       --accent-light:#3b82f6;
       --bg:#0f172a;
-      --card:#ffffff0d;
       --text:#e2e8f0;
       --border:#ffffff1a;
       --radius:14px;
-      --section-gap:5rem;
+      --gap:5rem;
+
+      /* сдержанные цвета секций */
+      --c-hero:rgba(11,90,160,.08);
+      --c-short:rgba(59,130,246,.08);
+      --c-audience:rgba(34,197,94,.08);
+      --c-program:rgba(139,92,246,.08);
+      --c-reg:rgba(239,68,68,.08);
+      --c-contacts:rgba(148,163,184,.08);
     }
 
     *{box-sizing:border-box;margin:0;padding:0}
@@ -33,22 +40,12 @@
     }
 
     /* Видео-фон + оверлей */
-    .video-bg{
-      position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;
-      filter:brightness(.35) contrast(1.1);
-    }
-    .overlay{
-      position:fixed;inset:0;background:linear-gradient(135deg,rgba(15,23,42,.85) 0%, rgba(15,23,42,.65) 100%);z-index:-1;
-    }
+    .video-bg{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;filter:brightness(.35) contrast(1.1)}
+    .overlay{position:fixed;inset:0;background:linear-gradient(135deg,rgba(15,23,42,.85) 0%, rgba(15,23,42,.65) 100%);z-index:-1}
 
     /* Живые цифры */
-    .stats{
-      display:flex;gap:2rem;justify-content:center;margin:2rem 0 3rem;flex-wrap:wrap;
-    }
-    .stats div{
-      background:var(--card);backdrop-filter:blur(10px);border:1px solid var(--border);
-      border-radius:var(--radius);padding:1.25rem 2rem;text-align:center;transition:transform .25s;
-    }
+    .stats{display:flex;gap:2rem;justify-content:center;margin:2rem 0 3rem;flex-wrap:wrap}
+    .stats div{background:rgba(255,255,255,.05);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 2rem;text-align:center;transition:transform .25s}
     .stats div:hover{transform:translateY(-4px)}
     .stats .num{font-size:2.2rem;font-weight:700;color:var(--accent-light)}
     .stats .txt{font-size:.9rem;opacity:.85}
@@ -60,20 +57,14 @@
     p{margin-bottom:1em;max-width:65ch}
 
     /* Аккордеон */
-    details{
-      background:var(--card);backdrop-filter:blur(10px);border:1px solid var(--border);
-      border-radius:var(--radius);padding:1.25rem 1.75rem;margin-bottom:1rem;cursor:pointer;
-      transition:box-shadow .25s;
-    }
+    details{background:rgba(255,255,255,.05);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.75rem;margin-bottom:1rem;cursor:pointer;transition:box-shadow .25s}
     details:hover{box-shadow:0 12px 30px -15px rgba(59,130,246,.25)}
-    summary{
-      display:flex;align-items:center;justify-content:space-between;font-weight:600;list-style:none;
-    }
+    summary{display:flex;align-items:center;justify-content:space-between;font-weight:600;list-style:none}
     summary::after{content:'\f078';font-family:'Font Awesome 6 Free';font-weight:900;font-size:.9rem;transition:transform .25s}
     details[open] summary::after{transform:rotate(180deg)}
     ul{margin-left:1.25em}
 
-    /* ЯРКАЯ кнопка: градиент + свечение + пульс */
+    /* Яркая кнопка */
     .btn{
       display:inline-flex;align-items:center;gap:.6em;
       background:linear-gradient(135deg,#f59e0b 0%,#ef4444 100%);
@@ -86,21 +77,18 @@
     .btn:hover{transform:translateY(-3px);box-shadow:0 0 30px #f59e0b, 0 10px 25px -8px rgba(239,68,68,.7)}
     .btn i{font-size:1.4rem}
     @keyframes pulse{
-      0%{box-shadow:0 0 0 0 #f59e0b80}
-      70%{box-shadow:0 0 0 12px #f59e0b00}
-      100%{box-shadow:0 0 0 0 #f59e0b00}
+      0%{box-shadow:0 0 0 0 #f59e0b80}70%{box-shadow:0 0 0 12px #f59e0b00}100%{box-shadow:0 0 0 0 #f59e0b00}
     }
 
-    /* Секции с большим интервалом */
-    .section{margin:var(--section-gap) 0}
+    /* Цветные секции */
+    .section{margin:var(--gap) 0;padding:3rem 2rem;border-radius:var(--radius);background:var(--bg);position:relative;z-index:1}
+    .section>*{max-width:900px;margin-left:auto;margin-right:auto}
+    .hero{background:var(--c-hero)}.short{background:var(--c-short)}.audience{background:var(--c-audience)}.program{background:var(--c-program)}.reg{background:var(--c-reg)}.contacts{background:var(--c-contacts)}
 
-    .contacts{margin-top:3rem;font-size:.95rem}
+    /* Подвал */
     .footer{margin-top:4rem;font-size:.8rem;text-align:center;opacity:.6}
 
-    @media(max-width:600px){
-      .stats{gap:.75rem 1.5rem}
-      .stats div{padding:1rem}
-    }
+    @media(max-width:600px){.stats{gap:.75rem 1.5rem}.stats div{padding:1rem}}
   </style>
 </head>
 
@@ -111,38 +99,39 @@
   <div class="overlay"></div>
 
   <div class="wrapper">
-    <h1>Искусство биостатистики: анализ, интерпретация, публикация</h1>
-    <p><strong>17 – 29 ноября 2025</strong> · 120 ак.ч. · онлайн (Zoom)</p>
+    <!-- Секция 0: Главный экран -->
+    <section class="section hero">
+      <h1>Искусство биостатистики: анализ, интерпретация, публикация</h1>
+      <p><strong>17 – 29 ноября 2025</strong> · 120 ак.ч. · онлайн (Zoom)</p>
+      <div class="stats">
+        <div><div class="num" data-target="10">0</div><div class="txt">живых занятий</div></div>
+        <div><div class="num" data-target="15">0</div><div class="txt">практических заданий</div></div>
+        <div><div class="num" data-target="100">0</div><div class="txt">% онлайн</div></div>
+      </div>
+    </section>
 
-    <!-- Живые цифры (обновлённые) -->
-    <div class="stats">
-      <div><div class="num" data-target="10">0</div><div class="txt">живых занятий</div></div>
-      <div><div class="num" data-target="15">0</div><div class="txt">практических заданий</div></div>
-      <div><div class="num" data-target="100">0</div><div class="txt">% онлайн</div></div>
-    </div>
-
-    <!-- Секция 0: Кратко о курсе -->
-    <section class="section">
+    <!-- Секция 1: Кратко о курсе (завлекающая) -->
+    <section class="section short">
       <h2>Кратко о курсе</h2>
       <p>
-        Интенсив-практикум, который за 2 недели переводит вас из «я боюсь статистики» в «я пишу статью по EBM-стандартам».
-        Проходите весь путь: от выбора дизайна исследования до публикации результатов. Работа в R, настоящие данные, обратная связь 24/7.
+        За 2 недели вы пройдёте полный путь от «я боюсь p-value» до «я пишу статью по стандартам CONSORT и STROBE».
+        Работаем на реальных данных, пишем код в R, разбираем peer-review и учимся публиковаться в международных журналах.
       </p>
     </section>
 
-    <!-- Секция 1: Для кого курс -->
-    <section class="section">
+    <!-- Секция 2: Для кого курс -->
+    <section class="section audience">
       <h2>Для кого курс</h2>
       <ul>
-        <li>Аспиранты и магистранты медицинских/биологических специальностей</li>
+        <li>Аспиранты и магистранты медицинских / биологических специальностей</li>
         <li>Молодые исследователи и научные сотрудники клиник</li>
-        <li>Врачи, эпидемиологи, преподаватели ВУЗов</li>
-        <li>Все, кто хочет читать и публиковать научные статьи</li>
+        <li>Врачи, провизоры, эпидемиологи, преподаватели ВУЗов</li>
+        <li>Все, кто хочет публиковаться в международных журналах и понимать biostatistics peer-review</li>
       </ul>
     </section>
 
-    <!-- Секция 2: Программа -->
-    <section class="section">
+    <!-- Секция 3: Программа -->
+    <section class="section program">
       <h2>Программа курса</h2>
       <details>
         <summary>Модуль 1. Основы биостатистики и дизайн исследований (26 ч)</summary>
@@ -154,46 +143,38 @@
       </details>
       <details>
         <summary>Модуль 3. Анализ взаимосвязей (32 ч)</summary>
-        <ul>
-        <li>3.1. Корреляционный анализ</li>
-        <li>3.2. Линейная регрессия</li>
-        <li>3.3. Логистическая регрессия</li>
-        <li>3.4. OR vs RR</li>
-      </ul>
-    </details>
+        <ul><li>3.1. Корреляционный анализ</li><li>3.2. Линейная регрессия</li><li>3.3. Логистическая регрессия</li><li>3.4. OR vs RR</li></ul>
+      </details>
+      <details>
+        <summary>Модуль 4. Продвинутые методы (28 ч)</summary>
+        <ul><li>4.1. Кривые Каплана-Майера</li><li>4.2. Модель пропорциональных рисков Кокса</li><li>4.3. Основы мета-анализа</li></ul>
+      </details>
+    </section>
 
-    <details>
-      <summary>Модуль 4. Продвинутые методы (28 ч)</summary>
-      <ul>
-        <li>4.1. Кривые Каплана-Майера</li>
-        <li>4.2. Модель Кокса</li>
-        <li>4.3. Основы мета-анализа</li>
-      </ul>
-    </details>
+    <!-- Секция 4: Регистрация -->
+    <section class="section reg">
+      <h2>Регистрация слушателей</h2>
+      <p>Заполните форму и загрузите 4 документа (PDF/JPG, до 5 МБ каждый):</p>
+      <button data-tally-open="Np5rLj" data-tally-width="600" data-tally-emoji-text="📄" data-tally-emoji-animation="bounce" class="btn">
+        <i class="fa-solid fa-paper-plane"></i> Подать заявку
+      </button>
+    </section>
 
-  <!-- Секция 3: Регистрация -->
-<section class="section">
-  <h2>Регистрация слушателей</h2>
-  <p>Заполните форму и загрузите 4 документа (PDF/JPG, до 5 МБ каждый):</p>
-  <button data-tally-open="Np5rLj" data-tally-width="600" data-tally-emoji-text="📄" data-tally-emoji-animation="bounce" class="btn">
-    <i class="fa-solid fa-paper-plane"></i> Подать заявку
-  </button>
-</section>
+    <!-- Секция 5: Контакты -->
+    <section class="section contacts">
+      <h2>Контакты</h2>
+      <p>
+        E-mail: <a href="mailto:ncph_science@mail.ru">ncph_science@mail.ru</a><br>
+        Telegram-бот: <a href="https://t.me/ncph_biostat_bot" target="_blank" rel="noopener">@ncph_biostat_bot</a>
+      </p>
+    </section>
 
-<!-- Секция 4: Контакты -->
-<section class="section contacts">
-  <h2>Контакты</h2>
-  <p>
-    E-mail: <a href="mailto:ncph_science@mail.ru">ncph_science@mail.ru</a><br>
-    Telegram-бот: <a href="https://t.me/ncph_biostat_bot" target="_blank" rel="noopener">@ncph_biostat_bot</a>
-  </p>
-</section>
+    <!-- Подвал -->
+    <div class="footer">
+      © 2025 РГП на ПХВ «Национальный центр общественного здравоохранения» МЗ РК
+    </div>
+  </div>
 
-<!-- Подвал -->
-<div class="footer">
-  © 2025 РГП на ПХВ «Национальный центр общественного здравоохранения» МЗ РК
-</div>
- </div>
   <!-- Анимация цифр -->
   <script>
     const counters=document.querySelectorAll('.num');

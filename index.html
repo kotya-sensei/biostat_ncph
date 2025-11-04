@@ -41,7 +41,7 @@
       position:fixed;inset:0;background:linear-gradient(135deg,rgba(15,23,42,.85) 0%, rgba(15,23,42,.65) 100%);z-index:-1;
     }
 
-    /* Живые цифры (без счётчика дней) */
+    /* Живые цифры (обновлённые) */
     .stats{
       display:flex;gap:2rem;justify-content:center;margin:2rem 0 3rem;flex-wrap:wrap;
     }
@@ -114,9 +114,9 @@
     <h1>Искусство биостатистики: анализ, интерпретация, публикация</h1>
     <p><strong>17 – 29 ноября 2025</strong> · 120 ак.ч. · онлайн (Zoom)</p>
 
-    <!-- Живые цифры -->
+    <!-- Живые цифры (обновлённые) -->
     <div class="stats">
-      <div><div class="num" data-target="420">0</div><div class="txt">часов видео</div></div>
+      <div><div class="num" data-target="10">0</div><div class="txt">живых занятий</div></div>
       <div><div class="num" data-target="15">0</div><div class="txt">практических заданий</div></div>
       <div><div class="num" data-target="100">0</div><div class="txt">% онлайн</div></div>
     </div>
@@ -133,12 +133,25 @@
         <ul><li>2.1. Вероятность и статистические распределения</li><li>2.2. Проверка гипотез (p-value, ДИ)</li><li>2.3. Методы сравнения групп</li><li>2.4. Расчёт размера выборки</li></ul>
       </details>
       <details>
-        <summary>Модуль 3. Анализ взаимосвязей (32 ч)
-<ul><li><li><li><li>
+        <summary>Модуль 3. Анализ взаимосвязей (32 ч)</summary>
+        <ul>
+        <li>3.1. Корреляционный анализ</li>
+        <li>3.2. Линейная регрессия</li>
+        <li>3.3. Логистическая регрессия</li>
+        <li>3.4. OR vs RR</li>
+      </ul>
+    </details>
 
-<details><summary>
-<ul><li><li><li>
-  <!-- Секция 2: Регистрация -->
+    <details>
+      <summary>Модуль 4. Продвинутые методы (28 ч)</summary>
+      <ul>
+        <li>4.1. Кривые Каплана-Майера</li>
+        <li>4.2. Модель Кокса</li>
+        <li>4.3. Основы мета-анализа</li>
+      </ul>
+    </details>
+
+      <!-- Секция 2: Регистрация -->
 <section class="section">
   <h2>Регистрация слушателей</h2>
   <p>Заполните форму и загрузите 4 документа (PDF/JPG, до 5 МБ каждый):</p>
@@ -160,7 +173,7 @@
 <div class="footer">
   © 2025 РГП на ПХВ «Национальный центр общественного здравоохранения» МЗ РК
 </div>
-  </div>
+</div>
   <!-- Анимация цифр -->
   <script>
     // Анимация чисел при скролле

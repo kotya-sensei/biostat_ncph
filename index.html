@@ -41,7 +41,7 @@
       position:fixed;inset:0;background:linear-gradient(135deg,rgba(15,23,42,.85) 0%, rgba(15,23,42,.65) 100%);z-index:-1;
     }
 
-    /* Живые цифры (обновлённые) */
+    /* Живые цифры */
     .stats{
       display:flex;gap:2rem;justify-content:center;margin:2rem 0 3rem;flex-wrap:wrap;
     }
@@ -121,6 +121,26 @@
       <div><div class="num" data-target="100">0</div><div class="txt">% онлайн</div></div>
     </div>
 
+    <!-- Секция 0: Кратко о курсе -->
+    <section class="section">
+      <h2>Кратко о курсе</h2>
+      <p>
+        Интенсив-практикум, который за 2 недели переводит вас из «я боюсь статистики» в «я пишу статью по EBM-стандартам».
+        Проходите весь путь: от выбора дизайна исследования до публикации результатов. Работа в R, настоящие данные, обратная связь 24/7.
+      </p>
+    </section>
+
+    <!-- Секция 1: Для кого курс -->
+    <section class="section">
+      <h2>Для кого курс</h2>
+      <ul>
+        <li>Аспиранты и магистранты медицинских/биологических специальностей</li>
+        <li>Молодые исследователи и научные сотрудники клиник</li>
+        <li>Врачи, эпидемиологи, преподаватели ВУЗов</li>
+        <li>Все, кто хочет читать и публиковать научные статьи</li>
+      </ul>
+    </section>
+
     <!-- Секция 1: Программа -->
     <section class="section">
       <h2>Программа курса</h2>
@@ -151,7 +171,20 @@
       </ul>
     </details>
 
-      <!-- Секция 2: Регистрация -->
+    <!-- Секция 3: Программа -->
+<section class="section"><h2>
+<details><summary>
+<ul><li><li><li><li>
+
+<details><summary>
+<ul><li><li><li><li>
+
+<details><summary>
+<ul><li><li><li><li>
+
+<details><summary>
+<ul><li><li><li>
+  <!-- Секция 4: Регистрация -->
 <section class="section">
   <h2>Регистрация слушателей</h2>
   <p>Заполните форму и загрузите 4 документа (PDF/JPG, до 5 МБ каждый):</p>
@@ -160,12 +193,12 @@
   </button>
 </section>
 
-<!-- Секция 3: Контакты -->
+<!-- Секция 5: Контакты -->
 <section class="section contacts">
   <h2>Контакты</h2>
   <p>
-    E-mail: <a >ncph_science@mail.ru</a><br>
-    Куратор курса: <a >Хожамқұл Фариза +7 707 123 1523</a>
+    E-mail: <a href="mailto:ncph_science@mail.ru">ncph_science@mail.ru</a><br>
+    Telegram-бот: <a href="https://t.me/ncph_biostat_bot" target="_blank" rel="noopener">@ncph_biostat_bot</a>
   </p>
 </section>
 
@@ -173,10 +206,9 @@
 <div class="footer">
   © 2025 РГП на ПХВ «Национальный центр общественного здравоохранения» МЗ РК
 </div>
-</div>
+ </div>
   <!-- Анимация цифр -->
   <script>
-    // Анимация чисел при скролле
     const counters=document.querySelectorAll('.num');
     const speed=200;
     const countUp=target=>{

@@ -14,35 +14,39 @@
     :root{
       --accent:#0b5aa0;
       --accent-light:#3b82f6;
-      --bg:#f5f7fa;               /* ← светлый фон */
+      --bg:#f5f7fa;
       --card:#ffffff;
       --text:#1e293b;
       --border:#e2e8f0;
       --radius:14px;
       --gap:5rem;
 
-      /* ЯВНЫЕ, но сдержанные цвета секций */
+      /* цвета секций */
       --c-hero:#e0f2fe;
       --c-short:#fef3c7;
       --c-audience:#dcfce7;
       --c-program:#f3e8ff;
       --c-reg:#fee2e2;
-      --c-contacts:#f1f5f9;
+      --c-faq:#fff7ed;
+      --c-quest:#ffffff;
+      --c-footer:#f1f5f9;
     }
 
     *{box-sizing:border-box;margin:0;padding:0}
     body{
       font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-      color:var(--text);
-      background:var(--bg);
-      line-height:1.6;
-      min-height:100vh;
-      overflow-x:hidden;
+      color:var(--text);background:var(--bg);line-height:1.6;min-height:100vh;overflow-x:hidden;
     }
 
     /* Видео-фон + оверлей */
     .video-bg{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;filter:brightness(.45) contrast(1.1)}
     .overlay{position:fixed;inset:0;background:linear-gradient(135deg,rgba(245,247,250,.85) 0%, rgba(245,247,250,.65) 100%);z-index:-1}
+
+    /* Цветные секции + центрирование заголовков */
+    .section{margin:var(--gap) 0;padding:3rem 2rem;border-radius:var(--radius);background:var(--bg);position:relative;z-index:1}
+    .section>*{max-width:900px;margin-left:auto;margin-right:auto}
+    .center{text-align:center}
+    h1,h2{text-align:center} /* центр всех заголовков секций */
 
     /* Живые цифры */
     .stats{display:flex;gap:2rem;justify-content:center;margin:2rem 0 3rem;flex-wrap:wrap}
@@ -50,12 +54,6 @@
     .stats div:hover{transform:translateY(-4px)}
     .stats .num{font-size:2.2rem;font-weight:700;color:var(--accent-light)}
     .stats .txt{font-size:.9rem;opacity:.85}
-
-    h1,h2{color:var(--accent-light);margin-bottom:.5em}
-    h1{font-size:clamp(2rem,5vw,3rem);letter-spacing:-.02em}
-    h2{font-size:clamp(1.4rem,3vw,2rem)}
-
-    p{margin-bottom:1em;max-width:65ch}
 
     /* Аккордеон */
     details{background:rgba(255,255,255,.7);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.75rem;margin-bottom:1rem;cursor:pointer;transition:box-shadow .25s}
@@ -81,16 +79,8 @@
       0%{box-shadow:0 0 0 0 #f59e0b80}70%{box-shadow:0 0 0 12px #f59e0b00}100%{box-shadow:0 0 0 0 #f59e0b00}
     }
 
-    /* Цветные секции + центрирование текста в «Кратко» */
-    .section{margin:var(--gap) 0;padding:3rem 2rem;border-radius:var(--radius);background:var(--bg)}
-    .section>*{max-width:900px;margin-left:auto;margin-right:auto}
-    .center{text-align:center}
-    .hero{background:var(--c-hero)}.short{background:var(--c-short)}.audience{background:var(--c-audience)}.program{background:var(--c-program)}.reg{background:var(--c-reg)}.contacts{background:var(--c-contacts)}
-
     /* Подвал */
-    .footer{margin-top:4rem;font-size:.8rem;text-align:center;opacity:.6}
-
-    @media(max-width:600px){.stats{gap:.75rem 1.5rem}.stats div{padding:1rem}}
+    .footer{margin-top:4rem;padding:2rem 1rem;font-size:.8rem;text-align:center;background:var(--c-footer);opacity:.7}
   </style>
 </head>
 
@@ -101,10 +91,10 @@
   <div class="overlay"></div>
 
   <div class="wrapper">
-    <!-- Секция 0: Главный экран -->
+    <!-- 0 Главный экран -->
     <section class="section hero">
       <h1>Искусство биостатистики: анализ, интерпретация, публикация</h1>
-      <p><strong>17 – 28 ноября 2025</strong> · 120 ак.ч. · онлайн (Zoom)</p>
+      <p class="center"><strong>17 – 29 ноября 2025</strong> · 120 ак.ч. · онлайн (Zoom)</p>
       <div class="stats">
         <div><div class="num" data-target="10">0</div><div class="txt">живых занятий</div></div>
         <div><div class="num" data-target="15">0</div><div class="txt">практических заданий</div></div>
@@ -112,8 +102,8 @@
       </div>
     </section>
 
-    <!-- Секция 1: Кратко о курсе (завлекающая) -->
-    <section class="section short">
+    <!-- 1 Кратко о курсе -->
+    <section class="section short center">
       <h2>Кратко о курсе</h2>
       <p>
         За 2 недели вы пройдёте полный путь от «я боюсь p-value» до «я пишу статью по стандартам CONSORT и STROBE».
@@ -121,7 +111,7 @@
       </p>
     </section>
 
-    <!-- Секция 2: Для кого курс -->
+    <!-- 2 Для кого курс -->
     <section class="section audience">
       <h2>Для кого курс</h2>
       <ul>
@@ -132,7 +122,7 @@
       </ul>
     </section>
 
-    <!-- Секция 3: Программа -->
+    <!-- 3 Программа -->
     <section class="section program">
       <h2>Программа курса</h2>
       <details>
@@ -153,25 +143,56 @@
       </details>
     </section>
 
-    <!-- Секция 4: Регистрация -->
+    <!-- 4 Регистрация -->
     <section class="section reg">
       <h2>Регистрация слушателей</h2>
-      <p>Заполните форму для участия на курсе:</p>
-      <button data-tally-open="Np5rLj" data-tally-width="600" data-tally-emoji-text="📄" data-tally-emoji-animation="bounce" class="btn">
-        <i class="fa-solid fa-paper-plane"></i> Подать заявку
-      </button>
+      <p class="center">Заполните форму и загрузите 4 документа (PDF/JPG, до 5 МБ каждый):</p>
+      <div class="center">
+        <button data-tally-open="Np5rLj" data-tally-width="600" data-tally-emoji-text="📄" data-tally-emoji-animation="bounce" class="btn">
+          <i class="fa-solid fa-paper-plane"></i> Подать заявку
+        </button>
+      </div>
     </section>
 
-    <!-- Секция 5: Контакты -->
-    <section class="section contacts">
-      <h2>Контакты</h2>
-      <p>
-        E-mail: <a href="mailto:ncph_science@mail.ru">ncph_science@mail.ru</a><br>
-        Куратор курса: Хожамқұл Фариза<a href=»tel:+77071231523″>+7 707 123 1523</a> 
-      </p>
+    <!-- 5 FAQ -->
+    <section class="section faq">
+      <h2>Часто задаваемые вопросы (FAQ)</h2>
+
+      <details>
+        <summary>Какая стоимость обучения?</summary>
+        <p>Стоимость курса составляет 63 000 тенге.</p>
+      </details>
+
+      <details>
+        <summary>Какой документ я получу после окончания?</summary>
+        <p>По завершении курса выдается Свидетельство о повышении квалификации. Оно будет доступно в электронном формате на платформе e-license.kz. Мы предоставим вам инструкцию по его получению.</p>
+      </details>
+
+      <details>
+        <summary>Когда будет известно точное расписание занятий?</summary>
+        <p>Расписание формируется после полного набора группы. Мы составляем его, учитывая количество слушателей и предпочтения большинства обучающихся, чтобы найти наиболее удобное время.</p>
+      </details>
+
+      <details>
+        <summary>Может ли моя организация оплатить обучение?</summary>
+        <p>Да, для юридических лиц предусмотрена возможность оплаты. Организации могут произвести оплату через подачу заявления на государственном портале.</p>
+      </details>
+
+      <details>
+        <summary>Будут ли предоставлены материалы курса после обучения?</summary>
+        <p>Да, по завершении курса всем слушателям будут предоставлены выжимки (краткие конспекты) лекций. Обратите внимание, что сами презентационные слайды не предоставляются.</p>
+      </details>
     </section>
 
-    <!-- Подвал -->
+    <!-- 6 Вторая форма «Задать вопрос» -->
+<section class="section question-box">
+  <h2>Не нашли ответ? Задать вопрос</h2>
+  <!-- Ваш Tally-embed -->
+  <iframe src="https://tally.so/r/D42KWq?alignLeft=1&hideTitle=1" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0" title="Question box"></iframe>
+</section>>
+    </section>
+
+    <!-- 7 Подвал -->
     <div class="footer">
       © 2025 РГП на ПХВ «Национальный центр общественного здравоохранения» МЗ РК
     </div>
